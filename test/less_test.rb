@@ -48,6 +48,12 @@ class LessTest < Test::Unit::TestCase
     assert_equal "#main{background-color:#ffffff;}", body.gsub(/\s/, "")
   end
 
+  it 'imports other .less files in views path' do
+    less_app { less '@import "hello.less";' }
+    assert ok?
+    assert_equal "#main{background-color:#ffffff;}", body.gsub(/\s/, "")
+  end
+
   it 'ignores the layout option' do
     less_app { less :hello, :layout => :layout2 }
     assert ok?
